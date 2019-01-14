@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.5.1
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(949, 736)
+        MainWindow.resize(1028, 1177)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -306,10 +306,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.addWidget(self.splitter)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 949, 30))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1028, 39))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.toolBar = QtWidgets.QToolBar(MainWindow)
+        self.toolBar.setEnabled(True)
         self.toolBar.setContextMenuPolicy(QtCore.Qt.PreventContextMenu)
         self.toolBar.setMovable(True)
         self.toolBar.setToolButtonStyle(QtCore.Qt.ToolButtonFollowStyle)
@@ -345,8 +346,12 @@ class Ui_MainWindow(object):
         self.actionTrimMarginsAll = QtWidgets.QAction(MainWindow)
         self.actionTrimMarginsAll.setEnabled(False)
         self.actionTrimMarginsAll.setObjectName("actionTrimMarginsAll")
+        self.actionPrint = QtWidgets.QAction(MainWindow)
+        self.actionPrint.setEnabled(False)
+        self.actionPrint.setObjectName("actionPrint")
         self.toolBar.addAction(self.actionOpenFile)
         self.toolBar.addAction(self.actionKrop)
+        self.toolBar.addAction(self.actionPrint)
         self.toolBar.addAction(self.actionZoomIn)
         self.toolBar.addAction(self.actionZoomOut)
         self.toolBar.addAction(self.actionFitInView)
@@ -445,4 +450,6 @@ class Ui_MainWindow(object):
         self.actionSelectFile.setText(_translate("MainWindow", "Select File"))
         self.actionTrimMarginsAll.setText(_translate("MainWindow", "Trim Margins"))
         self.actionTrimMarginsAll.setToolTip(_translate("MainWindow", "Trim Margins"))
+        self.actionPrint.setText(_translate("MainWindow", "Print"))
+        self.actionPrint.setToolTip(_translate("MainWindow", "Print cropped PDF file"))
 

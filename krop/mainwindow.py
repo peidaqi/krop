@@ -119,6 +119,7 @@ class MainWindow(QKMainWindow):
         self.setWindowIcon(QIcon.fromTheme('edit-cut'))
         self.ui.actionOpenFile.setIcon(QIcon.fromTheme('document-open'))
         self.ui.actionKrop.setIcon(QIcon.fromTheme('face-smile'))
+        self.ui.actionPrint.setIcon(QIcon.fromTheme('document-print'))
         self.ui.actionZoomIn.setIcon(QIcon.fromTheme('zoom-in'))
         self.ui.actionZoomOut.setIcon(QIcon.fromTheme('zoom-out'))
         self.ui.actionFitInView.setIcon(QIcon.fromTheme('zoom-fit-best'))
@@ -155,6 +156,7 @@ class MainWindow(QKMainWindow):
         self.ui.actionOpenFile.triggered.connect(self.slotOpenFile)
         self.ui.actionSelectFile.triggered.connect(self.slotSelectFile)
         self.ui.actionKrop.triggered.connect(self.slotKrop)
+        self.ui.actionPrint.triggered.connect(self.slotPrint)
         self.ui.actionZoomIn.triggered.connect(self.slotZoomIn)
         self.ui.actionZoomOut.triggered.connect(self.slotZoomOut)
         self.ui.actionFitInView.toggled.connect(self.slotFitInView)
@@ -243,6 +245,7 @@ class MainWindow(QKMainWindow):
                             "Please check the file and its permissions."))
             self.ui.actionKrop.setEnabled(not self.viewer.isEmpty())
             self.ui.actionTrimMarginsAll.setEnabled(not self.viewer.isEmpty())
+            self.ui.actionPrint.setEnabled(False)
             self.ui.editFile.setText(outputFileName)
             self.updateControls()
 
@@ -338,6 +341,17 @@ class MainWindow(QKMainWindow):
                     self.tr("The following unexpected error has occured:"
                     "\n\n{0}").format(err))
             raise err
+
+        self.ui.actionPrint.setEnabled(True)
+
+    def slotPrint(self):
+        import cups
+        import subprocess
+        croppedFilename = "%s-cropped.pdf" % splitext(str_unicode(self.fileName))[0]
+        printerCon = cups.Connection()
+        printersLst = printerCon.getPrinters()
+        printer = QInputDialog.getItem(self, "Please select printer", "", list(printersLst.keys()))
+        subprocess.check_call(['lp', '-d', str(printer[0]), '-o', 'fit-to-page', croppedFilename])
 
     def slotZoomIn(self):
         self.ui.actionFitInView.setChecked(False)

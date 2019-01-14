@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>949</width>
-    <height>736</height>
+    <width>1028</width>
+    <height>1177</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -488,7 +488,16 @@ p, li { white-space: pre-wrap; margin: 0; }
         <enum>QFrame::Raised</enum>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
-        <property name="margin">
+        <property name="leftMargin">
+         <number>1</number>
+        </property>
+        <property name="topMargin">
+         <number>1</number>
+        </property>
+        <property name="rightMargin">
+         <number>1</number>
+        </property>
+        <property name="bottomMargin">
          <number>1</number>
         </property>
         <item>
@@ -510,7 +519,16 @@ p, li { white-space: pre-wrap; margin: 0; }
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <property name="margin">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
             <number>0</number>
            </property>
            <item>
@@ -734,12 +752,15 @@ p, li { white-space: pre-wrap; margin: 0; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>949</width>
-     <height>30</height>
+     <width>1028</width>
+     <height>39</height>
     </rect>
    </property>
   </widget>
   <widget class="QToolBar" name="toolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="contextMenuPolicy">
     <enum>Qt::PreventContextMenu</enum>
    </property>
@@ -763,6 +784,7 @@ p, li { white-space: pre-wrap; margin: 0; }
    </attribute>
    <addaction name="actionOpenFile"/>
    <addaction name="actionKrop"/>
+   <addaction name="actionPrint"/>
    <addaction name="actionZoomIn"/>
    <addaction name="actionZoomOut"/>
    <addaction name="actionFitInView"/>
@@ -857,6 +879,17 @@ p, li { white-space: pre-wrap; margin: 0; }
    </property>
    <property name="toolTip">
     <string>Trim Margins</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Print</string>
+   </property>
+   <property name="toolTip">
+    <string>Print cropped PDF file</string>
    </property>
   </action>
  </widget>

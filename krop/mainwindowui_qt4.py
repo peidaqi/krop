@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created by: PyQt4 UI code generator 4.11.4
+# Created by: PyQt4 UI code generator 4.12.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -25,7 +25,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(949, 736)
+        MainWindow.resize(1028, 1177)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.verticalLayout_7 = QtGui.QVBoxLayout(self.centralwidget)
@@ -44,6 +44,7 @@ class Ui_MainWindow(object):
         self.tabBasic = QtGui.QWidget()
         self.tabBasic.setObjectName(_fromUtf8("tabBasic"))
         self.verticalLayout_4 = QtGui.QVBoxLayout(self.tabBasic)
+        self.verticalLayout_4.setMargin(0)
         self.verticalLayout_4.setObjectName(_fromUtf8("verticalLayout_4"))
         self.groupBox = QtGui.QGroupBox(self.tabBasic)
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
@@ -107,6 +108,7 @@ class Ui_MainWindow(object):
         self.tabAdvanced = QtGui.QWidget()
         self.tabAdvanced.setObjectName(_fromUtf8("tabAdvanced"))
         self.verticalLayout_6 = QtGui.QVBoxLayout(self.tabAdvanced)
+        self.verticalLayout_6.setMargin(0)
         self.verticalLayout_6.setObjectName(_fromUtf8("verticalLayout_6"))
         self.groupSelectionMode = QtGui.QGroupBox(self.tabAdvanced)
         self.groupSelectionMode.setFlat(False)
@@ -197,6 +199,7 @@ class Ui_MainWindow(object):
         self.tabHelp = QtGui.QWidget()
         self.tabHelp.setObjectName(_fromUtf8("tabHelp"))
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.tabHelp)
+        self.verticalLayout_3.setMargin(0)
         self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
         self.labelHelp = QtGui.QLabel(self.tabHelp)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Ignored, QtGui.QSizePolicy.Preferred)
@@ -320,10 +323,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.addWidget(self.splitter)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 949, 30))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1028, 39))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         MainWindow.setMenuBar(self.menubar)
         self.toolBar = QtGui.QToolBar(MainWindow)
+        self.toolBar.setEnabled(True)
         self.toolBar.setContextMenuPolicy(QtCore.Qt.PreventContextMenu)
         self.toolBar.setMovable(True)
         self.toolBar.setToolButtonStyle(QtCore.Qt.ToolButtonFollowStyle)
@@ -359,8 +363,12 @@ class Ui_MainWindow(object):
         self.actionTrimMarginsAll = QtGui.QAction(MainWindow)
         self.actionTrimMarginsAll.setEnabled(False)
         self.actionTrimMarginsAll.setObjectName(_fromUtf8("actionTrimMarginsAll"))
+        self.actionPrint = QtGui.QAction(MainWindow)
+        self.actionPrint.setEnabled(False)
+        self.actionPrint.setObjectName(_fromUtf8("actionPrint"))
         self.toolBar.addAction(self.actionOpenFile)
         self.toolBar.addAction(self.actionKrop)
+        self.toolBar.addAction(self.actionPrint)
         self.toolBar.addAction(self.actionZoomIn)
         self.toolBar.addAction(self.actionZoomOut)
         self.toolBar.addAction(self.actionFitInView)
@@ -458,4 +466,6 @@ class Ui_MainWindow(object):
         self.actionSelectFile.setText(_translate("MainWindow", "Select File", None))
         self.actionTrimMarginsAll.setText(_translate("MainWindow", "Trim Margins", None))
         self.actionTrimMarginsAll.setToolTip(_translate("MainWindow", "Trim Margins", None))
+        self.actionPrint.setText(_translate("MainWindow", "Print", None))
+        self.actionPrint.setToolTip(_translate("MainWindow", "Print cropped PDF file", None))
 
