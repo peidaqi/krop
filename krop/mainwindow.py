@@ -347,11 +347,42 @@ class MainWindow(QKMainWindow):
     def slotPrint(self):
         import cups
         import subprocess
+        from PyQt5.QtPrintSupport import QPrintDialog
+        from PyQt5.QtPrintSupport import QPrinter
+        from PyQt5 import QtGui
         croppedFilename = "%s-cropped.pdf" % splitext(str_unicode(self.fileName))[0]
-        printerCon = cups.Connection()
-        printersLst = printerCon.getPrinters()
-        printer = QInputDialog.getItem(self, "Please select printer", "", list(printersLst.keys()))
-        subprocess.check_call(['lp', '-d', str(printer[0]), '-o', 'fit-to-page', croppedFilename])
+        # printerCon = cups.Connection()
+
+        printer = QPrinter()
+        printDlg = QPrintDialog(printer)
+        if printDlg.exec() == QDialog.Accepted:
+            printerName = printer.printerName()
+            cmdLine = ['lpr', '-d', printerName]
+            cmdLine += ['-n', printer.copyCount()]
+            cmdLine += ['-o', 'fit-to-page'] # We want to print out the cropped PDF anyway.
+            # Handle duplex
+            if printer.duplex() == QPrinter.DuplexNone:
+                cmdLine += ['-o', 'Duplex=None'']
+            if printer.duplex() == QPrinter.DuplexLongSide:
+                cmdLine += ['-o', 'Duplex=DuplexNoTumble'']
+            if printer.duplex() == QPrinter.DuplexShortSide:    
+                cmdLine += ['-o', 'Duplex=DuplexTumble'']
+            # Orientation
+            if printer.pageLayout().pageOrientation() == QPageLayout.Landscape:
+                cmdLine += ['-o', 'landscape']
+            # Color mode
+            if printer.colorMode() == QPrinter.GrayScale:
+                cmdLine += ['-o', 'ColorMode=Grayscale']
+            if printer.colorMode() == QPrinter.Color:
+                cmdLine += ['-o', 'ColorMode=Color']
+            # Page size
+            cmdLine += ['-o', str(printer.pageLayout().pageSize().id())]
+            
+            cmdLine.append(croppedFilename)
+        # printersLst = printerCon.getPrinters()
+        # printer = QInputDialog.getItem(self, "Please select printer", "", list(printersLst.keys()))
+            print('Print command line: ' + ' '.join(cmdLine))
+            subprocess.check_call(cmdLine)
 
     def slotZoomIn(self):
         self.ui.actionFitInView.setChecked(False)
