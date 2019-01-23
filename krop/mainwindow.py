@@ -357,18 +357,18 @@ class MainWindow(QKMainWindow):
         printDlg = QPrintDialog(printer)
         if printDlg.exec() == QDialog.Accepted:
             printerName = printer.printerName()
-            cmdLine = ['lpr', '-d', printerName]
-            cmdLine += ['-n', printer.copyCount()]
+            cmdLine = ['lp', '-d', printerName]
+            cmdLine += ['-n', str(printer.copyCount())]
             cmdLine += ['-o', 'fit-to-page'] # We want to print out the cropped PDF anyway.
             # Handle duplex
             if printer.duplex() == QPrinter.DuplexNone:
-                cmdLine += ['-o', 'Duplex=None'']
+                cmdLine += ['-o', 'Duplex=None']
             if printer.duplex() == QPrinter.DuplexLongSide:
-                cmdLine += ['-o', 'Duplex=DuplexNoTumble'']
+                cmdLine += ['-o', 'Duplex=DuplexNoTumble']
             if printer.duplex() == QPrinter.DuplexShortSide:    
-                cmdLine += ['-o', 'Duplex=DuplexTumble'']
+                cmdLine += ['-o', 'Duplex=DuplexTumble']
             # Orientation
-            if printer.pageLayout().pageOrientation() == QPageLayout.Landscape:
+            if printer.pageLayout().orientation() == QPageLayout.Landscape:
                 cmdLine += ['-o', 'landscape']
             # Color mode
             if printer.colorMode() == QPrinter.GrayScale:
@@ -376,7 +376,11 @@ class MainWindow(QKMainWindow):
             if printer.colorMode() == QPrinter.Color:
                 cmdLine += ['-o', 'ColorMode=Color']
             # Page size
-            cmdLine += ['-o', str(printer.pageLayout().pageSize().id())]
+            pagesizeid_to_pagesize = {}
+            for prop_name in QPageSize.__dict__.keys():
+                if type(QPageSize.__dict__[prop_name]) == type(QPageSize.PageSizeId()):
+                    pagesizeid_to_pagesize[QPageSize.__dict__[prop_name]] = prop_name
+            cmdLine += ['-o', 'media=' + pagesizeid_to_pagesize[printer.pageLayout().pageSize().id()]]
             
             cmdLine.append(croppedFilename)
         # printersLst = printerCon.getPrinters()
